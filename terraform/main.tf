@@ -182,7 +182,7 @@ resource "aws_glue_job" "analytics_job" {
 
   }
   
-  max_capacity = 0.0625 
+  max_capacity = 1.0
 
   timeout = 15
 

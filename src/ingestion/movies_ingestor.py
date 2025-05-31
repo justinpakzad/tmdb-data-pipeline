@@ -65,7 +65,7 @@ class MoviesIngestor:
                 data=data, date_col="release_date"
             )
             params["primary_release_date.lte"] = extend_date(
-                date=params.get("primary_release_date.lte"), n_months=3
+                date=params.get("primary_release_date.lte"), n_months=36
             )
 
         return data

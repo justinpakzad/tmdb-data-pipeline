@@ -1,3 +1,27 @@
+CREATE EXTERNAL TABLE tmdb_data.agg_top_movies_by_revenue (
+    title STRING,
+    total_budget BIGINT,
+    total_revenue BIGINT,
+    total_votes BIGINT
+
+)
+STORED AS PARQUET
+LOCATION 's3://tmdb-data-jp/analytics/agg_top_movies_by_revenue/';
+
+
+CREATE EXTERNAL TABLE tmdb_data.agg_movies_by_year (
+    release_year INT,
+    movie_count INT,
+    avg_popularity DOUBLE,
+    avg_votes DOUBLE,
+    total_votes INT,
+    avg_budget DOUBLE,
+    total_budget BIGINT,
+    total_revenue BIGINT
+)
+STORED AS PARQUET
+LOCATION 's3://tmdb-data-jp/analytics/agg_movies_by_year/';
+
 CREATE EXTERNAL TABLE tmdb_data.agg_movies_by_year_and_genre (
     release_year INT,
     genre STRING,
