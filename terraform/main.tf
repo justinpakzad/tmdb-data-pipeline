@@ -113,6 +113,9 @@ resource "aws_ssm_parameter" "paramater_store_tmdb" {
   name  = "paramater_store_tmdb"
   type  = "String"
   value = var.tmdb_api_key
+  lifecycle {
+    ignore_changes = [value]
+  }
 }
 
 
