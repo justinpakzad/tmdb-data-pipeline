@@ -1,11 +1,11 @@
 # TMDB Pipeline (WIP)
-The TMDB pipeline utilizes the [TMDB API](https://developer.themoviedb.org/docs/getting-started) to extract movie data from various endpoints, transform that data, and load it into a data lake within AWS.
+The TMDB pipeline utilizes the [TMDB API](https://developer.themoviedb.org/docs/getting-started) to extract movie data from various endpoints, transform that data, and load it into a data lake within AWS. Final outputs feed into an Apache Superset dashboard that auto-updates daily.
 
 ## Overview
 
 ### Ingestion
-- Data is pulled from multiple TMDB endpoints using AWS Lambda functions.
-- The process starts by hitting the **/movies**  endpoint to fetch movie IDs. Subsequent jobs use those IDs to fetch movie details (e.g.  cast,crew, watch providers, etc).
+- Data is pulled from multiple TMDB endpoints using AWS Lambda functions containerized with Docker.
+- The process starts by hitting the **/movies**  endpoint to fetch movie IDs. Subsequent jobs use those IDs to fetch movie details (e.g. cast,crew, watch providers, etc).
 
 ### Transformation
 - AWS Glue Python shell jobs and Polars handle all transformations. The transformation jobs are idempotent rerun or reuse without duplicating or reprocessing data.
