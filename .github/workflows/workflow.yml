@@ -85,6 +85,6 @@ jobs:
         do 
             aws lambda update-function-code \
                     --function-name $lambda_func \
-                    --image-uri 982081066484.dkr.ecr.us-east-1.amazonaws.com/tmdb-images:latest
+                    --image-uri ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/tmdb-images:latest
         done
 
