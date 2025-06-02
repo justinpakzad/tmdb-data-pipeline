@@ -25,6 +25,22 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: "us-east-1"
 
+    - name: Initialize Terraform
+      working-directory: ./terraform
+      run: terraform init
+
+    - name: Terraform Plan
+      working-directory: ./terraform
+      env:
+        TF_VAR_tmdb_api_key: ${{ secrets.API_KEY }}
+      run: terraform plan
+
+    - name: Terraform Apply
+      working-directory: ./terraform
+      env:
+        TF_VAR_tmdb_api_key: ${{ secrets.API_KEY }}
+      run: terraform apply -auto-approve
+
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
@@ -37,6 +53,20 @@ jobs:
     - name: Run Tests
       run: | 
         python -m pytest
+
+    - name: Push Objects to S3
+      run: |
+        zip -r src.zip src -x '.DS_Store' -x '**pycache**' -x '**.pyc**' -x 'src/sql/**'
+        aws s3 cp src.zip s3://tmdb-data-jp/dependencies/src.zip
+        aws s3 cp glue_utils/glue_utils.py s3://tmdb-data-jp/dependencies/glue_utils.py
+        aws s3 cp jobs/transformation_jobs/ s3://tmdb-data-jp/jobs/transformation_jobs --recursive \
+          --exclude "*.DS_Store" \
+          --exclude "*__pycache__*" \
+          --exclude "*.pyc"
+        aws s3 cp jobs/analytics_jobs/ s3://tmdb-data-jp/jobs/analytics_jobs --recursive \
+          --exclude "*.DS_Store" \
+          --exclude "*__pycache__*" \
+          --exclude "*.pyc"
 
     - name: Login To ECR
       id: login-ecr
