@@ -47,13 +47,14 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
 
-    - name: Build and push Docker image
+    - name: Build and Push Docker image
       run: |
         docker buildx build \
           --platform linux/arm64 \
           --tag ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/tmdb-images:latest \
-          --output=type=image,push=true,oci-mediatypes=false \
+          --output=type=registry,oci-mediatypes=false \
           .
+
 
       
     - name: Update Lambda Functions
