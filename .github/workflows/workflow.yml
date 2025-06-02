@@ -1,4 +1,4 @@
-name: TMDB Pipeline Infra and Applications
+name: TMDB CI/CD Pipeline
 
 on:
   push:
@@ -74,7 +74,7 @@ jobs:
 
     - name: Push Docker Image To Ecr
       run: |
-        docker build -t tmdb_image .
+        docker build --platform linux/arm64 -t tmdb_image .
         docker tag tmdb_image  ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/tmdb-images
         docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/tmdb-images
 
