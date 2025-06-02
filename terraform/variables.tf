@@ -18,7 +18,7 @@ variable "max_capacity" {
 
 variable "tmdb_api_key" {
   type  = string
-  description = "TMDb API key"
+  description = "TMDB API key"
 }
 
 variable "image_uri" {

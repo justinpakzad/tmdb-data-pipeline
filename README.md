@@ -14,8 +14,14 @@ The TMDB pipeline utilizes the [TMDB API](https://developer.themoviedb.org/docs/
 
 ### Orchestration & Infrastructure
 - Airflow orchestrates all tasks via daily DAGs.
-- Infrastructure is fully managed using Terraform.
+- Infrastructure is managed using Terraform.
 - Superset dashboard auto-updates with each new data run.
+
+### CI/CD
+- GitHub Actions handles deployment of infrastructure and application code on Push/PR to main.
+- Terraform resources are applied, tests run via Pytest, and Python code is pushed to S3.
+- Docker image is built, pushed to ECR, and used to update all Lambda functions.
+
 
 ## Project Structure
 - `glue_utils/` – Glue helper utilities  

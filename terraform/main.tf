@@ -11,7 +11,13 @@ terraform {
     }
   }
 }
-
+terraform {
+  backend "s3" {
+    bucket = "tmdb-data-jp"
+    key    = "terraform/terraform.tfstate" 
+    region = "us-east-1"
+  }
+}
 
 provider "aws" {
   region = var.region
@@ -107,6 +113,9 @@ resource "aws_ssm_parameter" "paramater_store_tmdb" {
   name  = "paramater_store_tmdb"
   type  = "String"
   value = var.tmdb_api_key
+  lifecycle {
+    ignore_changes = [value]
+  }
 }
 
 
