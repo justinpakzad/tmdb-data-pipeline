@@ -3,8 +3,9 @@ name: TMDB Pipeline Infra and Applications
 on:
   push:
     branches: [main]
-  workflow_dispatch: 
-
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -67,6 +68,23 @@ jobs:
           --exclude "*__pycache__*" \
           --exclude "*.pyc"
 
+    - name: Login To ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
 
+    - name: Push Docker Image To Ecr
+      run: |
+        docker build -t tmdb_image .
+        docker tag tmdb_image  ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/tmdb-images
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/tmdb-images
 
+    - name: Update Lambda Functions
+      run: |
+        export AWS_PAGER=""
+        for lambda_func in "movies_ingestion" "movie_details_ingestion" "movie_reviews_ingestion" "movie_providers_ingestion" "movie_credits_ingestion"
+        do 
+            aws lambda update-function-code \
+                    --function-name $lambda_func \
+                    --image-uri 982081066484.dkr.ecr.us-east-1.amazonaws.com/tmdb-images:latest
+        done
 
