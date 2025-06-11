@@ -16,7 +16,7 @@ src.zip
 airflow/config
 airflow/logs
 airflow/plugins
-
 deploy_docker_image.sh
 p_files.sh
 push_dependencies_and_jobs.sh.DS_Store
+**/.DS_Store
