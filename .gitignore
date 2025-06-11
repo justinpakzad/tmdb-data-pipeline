@@ -19,4 +19,4 @@ airflow/plugins
 
 deploy_docker_image.sh
 p_files.sh
-push_dependencies_and_jobs.sh
+push_dependencies_and_jobs.sh.DS_Store

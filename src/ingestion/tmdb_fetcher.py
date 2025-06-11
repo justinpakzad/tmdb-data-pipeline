@@ -4,6 +4,7 @@ from src.utils.utils import (
     construct_full_endpoint,
 )
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import Future
 
 
 class TMDBFetcher:
@@ -94,7 +95,7 @@ class TMDBFetcher:
 
     def get_futures(
         self, movie_ids: list[int], base_endpoint: str, endpoint: str, max_workers=10
-    ):
+    ) -> dict[Future]:
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             func_to_execute = self.select_func_to_execute(endpoint=endpoint)
             futures = {
