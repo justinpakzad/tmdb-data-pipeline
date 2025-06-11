@@ -10,7 +10,7 @@ with DAG(
     dag_id="tmdb_ingestion_dag",
     start_date=datetime.datetime(2025, 5, 16),
     catchup=False,
-    schedule_interval=None,
+    schedule=None,
 ) as dag:
     movies = LambdaInvokeFunctionOperator(
         task_id="movies_ingestion",

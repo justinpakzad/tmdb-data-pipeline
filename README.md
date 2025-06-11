@@ -1,4 +1,4 @@
-# TMDB Pipeline (WIP)
+# TMDB Pipeline
 The TMDB pipeline utilizes the [TMDB API](https://developer.themoviedb.org/docs/getting-started) to extract movie data from various endpoints, transform that data, and load it into a data lake within AWS. Final outputs feed into an Apache Superset dashboard that auto-updates daily.
 
 ## Overview

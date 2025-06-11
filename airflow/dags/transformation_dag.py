@@ -8,7 +8,7 @@ with DAG(
     dag_id="tmdb_transformation_dag",
     start_date=datetime.datetime(2025, 5, 16),
     catchup=False,
-    schedule_interval=None,
+    schedule=None,
 ) as dag:
     movies = GlueJobOperator(
         task_id="movies_transformation",
