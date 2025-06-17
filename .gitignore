@@ -20,3 +20,4 @@ deploy_docker_image.sh
 p_files.sh
 push_dependencies_and_jobs.sh.DS_Store
 **/.DS_Store
+push_dependencies_and_jobs.sh
