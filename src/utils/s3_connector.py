@@ -2,11 +2,12 @@ import boto3
 import json
 import polars as pl
 from src.utils.utils import get_logger
+from botocore.client import BaseClient
 
 
 class S3Connector:
-    def __init__(self, bucket: str) -> None:
-        self.s3 = boto3.client("s3")
+    def __init__(self, bucket: str, s3_client: BaseClient = None) -> None:
+        self.s3 = s3_client if s3_client else boto3.client("s3")
         self.bucket = bucket
         self.logger = get_logger(__name__)
 

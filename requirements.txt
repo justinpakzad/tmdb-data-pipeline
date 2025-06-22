@@ -2,3 +2,4 @@ requests==2.32.3
 boto3==1.37.33
 polars==1.27.1
 pytest==8.3.5
+moto==5.1.6

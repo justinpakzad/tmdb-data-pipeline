@@ -37,6 +37,7 @@ The TMDB pipeline utilizes the [TMDB API](https://developer.themoviedb.org/docs/
   - `utils/` – Utility functions 
 - `tests/` 
   - `transformation_tests/`  - Unit tests for transformation logic
+  - `s3_tests/`  - Unit tests for S3 using moto 
 - `terraform/` – Infrastructure as Code (Terraform scripts for AWS)  
 
 
